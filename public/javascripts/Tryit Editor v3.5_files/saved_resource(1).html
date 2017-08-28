@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)https://www.w3schools.com/angular/tryit.asp?filename=try_ng_filters_custom -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style><script src="./angular.min.js"></script>
+</head><body contenteditable="false">
+
+<ul ng-app="myApp" ng-controller="namesCtrl" class="ng-scope">
+<!-- ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    JaNi
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    CaRl
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    MaRgArEtH
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    HeGe
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    JoE
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    GuStAv
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    BiRgIt
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    MaRy
+</li><!-- end ngRepeat: x in names --><li ng-repeat="x in names" class="ng-binding ng-scope">
+    KaI
+</li><!-- end ngRepeat: x in names -->
+</ul>
+
+<script>
+var app = angular.module('myApp', []);
+app.filter('myFormat', function() {
+    return function(x) {
+        var i, c, txt = "";
+        for (i = 0; i < x.length; i++) {
+            c = x[i];
+            if (i % 2 == 0) {
+                c = c.toUpperCase();
+            }
+            txt += c;
+        }
+        return txt;
+    };
+});
+app.controller('namesCtrl', function($scope) {
+    $scope.names = [
+        'Jani',
+        'Carl',
+        'Margareth',
+        'Hege',
+        'Joe',
+        'Gustav',
+        'Birgit',
+        'Mary',
+        'Kai'
+        ];
+});
+</script>
+
+<p>Make your own filters.</p>
+<p>This filter, called "myFormat", will uppercase every other character.</p>
+
+
+</body></html>

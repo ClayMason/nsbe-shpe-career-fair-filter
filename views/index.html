@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/semantic.min.css">
+  </head>
+  <body ng-app="filterApp" ng-controller="filterCtrl">
+    <div class="ui grid container centered"><br>
+      <h1 class="ui header">Title</h1><br>
+    </div>
+    <div class="ui horizontal segments">
+      <!-- Major search section-->
+      <div class="ui segment">
+        <div class="ui input focus">
+          <input type="text" placeholder="Major (separate \w comma)" size="40" ng-model="majorField" ng-change="majorCtrl()">
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="ui grid">
+          <div class="row">
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="Freshman" ng-click="trigger()" ng-model='filterConditions.grade_level.freshman' checked>
+                <label>Freshman</label>
+              </div>
+            </div>
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="Sophomore" ng-click='trigger()' ng-model='filterConditions.grade_level.sophomore' checked>
+                <label>Sophomore</label>
+              </div>
+            </div>
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="Junior" ng-click='trigger()' ng-model='filterConditions.grade_level.junior' checked>
+                <label>Junior</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="Senior" ng-click='trigger()' ng-model='filterConditions.grade_level.senior' checked>
+                <label>Senior</label>
+              </div>
+            </div>
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="Graduate" ng-click='trigger()' ng-model='filterConditions.grade_level.graduate' checked>
+                <label>Graduate</label>
+              </div>
+            </div>
+            <div class="five wide column">
+              <div class="ui checkbox">
+                <input type="checkbox" name="PhD" ng-click='trigger()' ng-model='filterConditions.grade_level.phd' checked>
+                <label>PhD</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">
+        <div class="ui grid">
+          <div class="sixteen wide column">
+            <div class="ui checkbox">
+              <input type="checkbox" name="Friday" ng-click='trigger()' ng-model='filterConditions.days.friday' checked>
+              <label>Friday</label>
+            </div>
+          </div>
+          <div class="sixteen wide column">
+            <div class="ui checkbox">
+              <input type="checkbox" name="Saturday" ng-click='trigger()' ng-model='filterConditions.days.saturday' checked>
+              <label>Saturday</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui segment">[{results}] Results</div>
+    </div>
+    <div class="ui grid">
+
+      <div class='four wide column' ng-repeat='job in jobs | jobsFilter:this'>
+        <div class='result-box'>
+          <button class='ui positive basic button' ng-hide='job.days_attending.indexOf("F")==-1'>Friday</button>
+          <button class='ui positive basic button' ng-hide='job.days_attending.indexOf("S")==-1'>Saturday</button>
+          <h3>[{ job.name }]</h3>
+          <div class='ui grid'>
+            <div class='eight wide column'>
+              <h5>MAJORS</h5>
+              <ul class='naked'>
+                <li ng-repeat="major in job.majors track by $index">[{ major }]</li>
+              </ul>
+            </div>
+            <div class='eight wide column'>
+              <h5>GRADES</h5>
+              <ul class='naked'>
+                <li ng-repeat="grade in job.grades track by $index">[{ grade }]</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <footer>
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/semantic.min.js"></script>
+    <script type="text/javascript" src="/javascripts/data_filter.js"></script>
+  </footer>
+</html>
