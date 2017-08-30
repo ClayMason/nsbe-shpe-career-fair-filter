@@ -18,6 +18,19 @@ var isWithin = function (arr, val) {
     return false;
 }
 
+var includesAtLeast = function (filter_arr, main_arr){
+
+    // if main_arr contains at least one in filter_arr, return true
+    for (i in main_arr) main_arr[i] = main_arr[i].toUpperCase();
+
+    for (i in filter_arr){
+        if (main_arr.indexOf(filter_arr[i].toUpperCase()) != -1) return true;
+    }
+
+    return false;
+
+}
+
 // load jobs
 
 $.getJSON('/javascripts/careers.json', function (response) {
@@ -133,9 +146,19 @@ app.filter('jobsFilter', function(){
         }
 
         // filter by grade
+
+        grades_arr = [];
+        for (var i = 0; i < 6; i++){
+            if (scope.filterConditions.grade_level[Object.keys(scope.filterConditions.grade_level)[i]] == true) 
+                grades_arr.push(Object.keys(scope.filterConditions.grade_level)[i]);
+        }
+
         for (var i = filtered_results.length -1; i>=0; i--){
             
-            if (!scope.checkGrades(filtered_results[i].grades)){
+            // if (!scope.checkGrades(filtered_results[i].grades)){
+            //     filtered_results.splice(i, 1);
+            // }
+            if (!includesAtLeast(grades_arr, filtered_results[i].grades)){
                 filtered_results.splice(i, 1);
             }
 
