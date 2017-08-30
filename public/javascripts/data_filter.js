@@ -33,8 +33,18 @@ var includesAtLeast = function (filter_arr, main_arr){
 
 // load jobs
 
-$.getJSON('/javascripts/careers.json', function (response) {
-    jobs = response;
+// $.getJSON('/javascripts/careers.json', function (response) {
+//     jobs = response;
+// });
+
+$.ajax({
+    url: '/javascripts/careers.json',
+    dataType: 'json',
+    async: false,
+    success: function(data){
+        console.log("Success");
+        jobs = data;
+    }
 });
 
 var app = angular.module("filterApp", [], function($interpolateProvider){
